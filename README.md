@@ -1,46 +1,136 @@
-# Getting Started with Create React App
+# Note-Taking Application Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the frontend application for the Note-Taking Application. It provides a user interface for user registration, login, and managing notes.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- User registration and login
+- Create, read, update, and delete notes
+- User authentication with JWT
+- Error handling and form validation
 
-### `npm start`
+## Technologies
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- React
+- TypeScript
+- Axios for HTTP requests
+- React Router for navigation
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node.js
+- Backend service
 
-### `npm run build`
+### Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/keshri23jayesh/noteapp-frontend
+    cd noteapp-frontend
+    ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Install dependencies:
+    ```bash
+    npm install
+    ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Create a `.env` file in the root directory with the following content:
+    ```env
+    REACT_APP_API_URL=http://localhost:3000
+    ```
 
-### `npm run eject`
+4. Start the development server:
+    ```bash
+    npm start
+    ```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Usage
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Register a new user by filling out the registration form.
+2. Log in with the registered user credentials.
+3. Create, read, update, and delete notes.
+4. Search for notes using the search bar.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Component Structure
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- **App.tsx:** Main component that sets up routes.
+- **components:**
+  - **Login.tsx:** Component for user login.
+  - **Register.tsx:** Component for user registration.
+  - **NoteList.tsx:** Component for listing notes.
+  - **NoteItem.tsx:** Component for individual note item.
 
-## Learn More
+### API Requests
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+All API requests are made using Axios. The base URL is set in the `.env` file.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Testing
+
+- Run the tests:
+    ```bash
+    npm test
+    ```
+
+### Example Requests and Responses
+
+#### User Registration
+
+- **URL:** `/register`
+- **Method:** `POST`
+- **Body:**
+    ```json
+    {
+        "username": "username",
+        "email": "user@example.com",
+        "password": "password123"
+    }
+    ```
+
+#### User Login
+
+- **URL:** `/login`
+- **Method:** `POST`
+- **Body:**
+    ```json
+    {
+        "username": "username",
+        "password": "password123"
+    }
+    ```
+- **Response:**
+    ```json
+    {
+        "token": "jwt_token"
+    }
+    ```
+
+#### Create Note
+
+- **URL:** `/notes`
+- **Method:** `POST`
+- **Headers:**
+    ```json
+    {
+        "Authorization": "Bearer jwt_token"
+    }
+    ```
+- **Body:**
+    ```json
+    {
+        "title": "Note Title",
+        "body": "Note Body",
+        "tags": ["tag1", "tag2"]
+    }
+    ```
+- **Response:**
+    ```json
+    {
+        "id": "note_id",
+        "title": "Note Title",
+        "body": "Note Body",
+        "tags": ["tag1", "tag2"],
+        "userId": "user_id"
+    }
+    ```
